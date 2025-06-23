@@ -62,7 +62,7 @@ const login = async (req, res) => {
             });
           }
 
-          res.status(200).setHeader(`token`, token).json({
+          res.status(200).setHeader(`token`, `Bearer ${token}`).json({
             message: "Login successfull",
           });
         }
