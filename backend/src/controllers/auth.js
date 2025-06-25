@@ -28,7 +28,7 @@ const register = async (req, res) => {
         password: hash,
       });
       res.json({
-        msg: data,
+        msg: "Congratulations! Your account has been successfully created.",
       });
     });
   } catch (e) {
@@ -55,16 +55,20 @@ const login = async (req, res) => {
         process.env.PRIVATE_KEY,
         { expiresIn: 60 * 60 },
         (err, token) => {
-          console.log(token);
+          // console.log(token);
           if (err) {
             res.status(500).json({
               message: "please try again later...",
             });
           }
 
-          res.status(200).setHeader(`token`, `Bearer ${token}`).json({
-            message: "Login successfull",
-          });
+          res
+            .status(200)
+            .setHeader(`token`, `Bearer ${token}`)
+            .json({
+              message: "Login successfull",
+              token: `Bearer ${token}`,
+            });
         }
       );
     }
